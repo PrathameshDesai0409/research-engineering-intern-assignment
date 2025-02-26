@@ -10,14 +10,14 @@ nltk.download('punkt')
 nltk.download('stopwords')
 
 # Load the dataset
-df = pd.read_csv("data/sentiment_results.csv")  # Ensure sentiment analysis saved this file
+df = pd.read_csv("data/sentiment_results.csv")
 
 # Preprocess text
 stop_words = set(stopwords.words('english'))
 
 def preprocess_text(text):
-    tokens = word_tokenize(text.lower())  # Tokenize and convert to lowercase
-    tokens = [word for word in tokens if word.isalpha() and word not in stop_words]  # Remove stopwords and non-alphabetic words
+    tokens = word_tokenize(text.lower())
+    tokens = [word for word in tokens if word.isalpha() and word not in stop_words]
     return tokens
 
 df['processed_text'] = df['text'].astype(str).apply(preprocess_text)

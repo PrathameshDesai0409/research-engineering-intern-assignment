@@ -8,7 +8,6 @@ from nltk.tokenize import word_tokenize
 nltk.download('punkt')
 nltk.download('stopwords')
 
-# Load raw text data (replace with actual source)
 raw_texts = [
     "Social media spreads information fast. Some of it is unreliable!",
     "AI and machine learning are changing the way we analyze data.",

@@ -22,5 +22,5 @@ def load_jsonl(filepath):
 
 # Example usage
 if __name__ == "__main__":
-    df = load_jsonl("data/dataset.jsonl")  # Update with actual filename
+    df = load_jsonl("data/dataset.jsonl")
     print(df.head())

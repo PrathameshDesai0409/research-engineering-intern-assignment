@@ -9,8 +9,8 @@ with open("data/preprocessed_texts.json", "r", encoding="utf-8") as f:
     preprocessed_texts = json.load(f)
 
 # Load dictionary and model (fixing filename)
-dictionary = Dictionary.load("models/lda_dictionary")  # Ensure this matches your trained dictionary file
-lda_model = LdaModel.load("models/lda_model")  # Ensure this matches your trained LDA model file
+dictionary = Dictionary.load("models/lda_dictionary")
+lda_model = LdaModel.load("models/lda_model")
 
 # Create corpus
 corpus = [dictionary.doc2bow(text) for text in preprocessed_texts]
