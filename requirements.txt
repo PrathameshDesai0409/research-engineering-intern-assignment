@@ -1,0 +1,9 @@
+numpy
+pandas
+scikit-learn
+nltk
+gensim
+faiss-cpu
+flask
+matplotlib
+seaborn
