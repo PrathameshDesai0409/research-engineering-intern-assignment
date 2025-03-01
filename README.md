@@ -97,14 +97,16 @@ The dashboard is hosted at: [Provide Deployment URL]
 ## Screenshots
 
 ### Dashboard View
-![Dashboard Screenshot](path/to/dashboard_screenshot.png)
+![Dashboard Screenshot](https://github.com/user-attachments/assets/5ca773f8-9f18-4226-aafb-445a1b6adb3b)
 
 ### Sentiment Analysis Results
-![Sentiment Screenshot](path/to/sentiment_screenshot.png)
+![Sentiment Screenshot](https://github.com/user-attachments/assets/cd5fa78a-3ec7-49ed-8c2e-dd588b154cd2)
 
 ### Topic Modeling Visualization
-![Topic Screenshot](path/to/topic_screenshot.png)
+![Topic Screenshot]([path/to/topic_screenshot.png](https://github.com/user-attachments/assets/506f943e-7d97-440c-b3d2-3c30d5d4e449))
 
+### Chatbot Integrations
+![Chatbot](https://github.com/user-attachments/assets/0da152fa-e1b4-4505-9a16-0d6042e739c8)
 ## Technologies Used
 
 - **Python** (Pandas, NumPy, Scikit-learn, NLTK, FAISS, Gensim, Flask)
@@ -121,9 +123,7 @@ The dashboard is hosted at: [Provide Deployment URL]
 
 ## Contributors
 
-- [Your Name]
+- Prathamesh Desai
 
 ---
-
-This README provides a structured guide to understanding and using the project effectively.
 
