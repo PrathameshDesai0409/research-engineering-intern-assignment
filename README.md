@@ -115,11 +115,33 @@ The dashboard is hosted at: [Provide Deployment URL]
 - **Flask** for the web dashboard
 - **Matplotlib/Seaborn** for data visualization
 
-## Future Enhancements
+### **Challenges Faced:**  
 
-- Improve chatbot responses using fine-tuned language models.
-- Implement real-time data fetching and analysis.
-- Expand visualization capabilities for better insights.
+1. **Model Training Issues:**  
+   - Faced difficulties in training the **LDA topic model**, requiring multiple parameter tuning to get meaningful topics.  
+   - Struggled with optimizing **sentiment analysis accuracy**, as the model sometimes misclassified sentiments.  
+
+2. **Data Processing Challenges:**  
+   - Handling **large datasets** efficiently was a challenge, especially during preprocessing and vector storage.  
+   - Cleaning and standardizing social media text (including slang, emojis, and abbreviations) was complex.  
+
+3. **FAISS Index & Chatbot Limitations:**  
+   - The **FAISS-based chatbot** occasionally retrieved irrelevant responses due to noisy data and improper embeddings.  
+   - Struggled with improving chatbot response quality for user queries.  
+
+4. **Visualization Issues:**  
+   - Encountered difficulties in **rendering interactive LDA topic visualizations**, especially in integrating them with Flask.  
+   - Large datasets caused performance issues in generating visualizations.  
+
+5. **Deployment and Integration Challenges:**  
+   - Hosting the web dashboard and ensuring smooth API integration took longer than expected.  
+   - Faced compatibility issues with certain Python dependencies when setting up the environment on different systems.  
+
+### **Future Improvements:**  
+- Fine-tune the sentiment analysis model for better classification accuracy.  
+- Optimize FAISS-based retrieval to improve chatbot responses.  
+- Improve visualization performance for large datasets.  
+- Enhance real-time data processing capabilities.  
 
 ## Contributors
 
