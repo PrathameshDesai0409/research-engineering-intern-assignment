@@ -1,41 +1,61 @@
-import faiss
-import numpy as np
-import os
-import json
+import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import pyLDAvis
+import pyLDAvis.gensim_models as gensimvis
+from gensim.corpora import Dictionary
+from gensim.models import LdaModel
+from chatbot.query_engine import query_engine  # Import chatbot query engine
 
-# Paths
-FAISS_INDEX_PATH = "faiss_index/index.faiss"
-DATA_PATH = "data/dataset.jsonl"
+# Set Streamlit page config
+st.set_page_config(page_title="Social Media Analytics Dashboard", layout="wide")
 
-# Load FAISS index
-def load_faiss_index():
-    if not os.path.exists(FAISS_INDEX_PATH):
-        raise FileNotFoundError(f"FAISS index not found at {FAISS_INDEX_PATH}!")
-    return faiss.read_index(FAISS_INDEX_PATH)
+st.title("📊 Social Media Analytics Dashboard")
 
-# Load dataset
-def load_documents():
-    if not os.path.exists(DATA_PATH):
-        raise FileNotFoundError(f"Dataset file missing: {DATA_PATH}")
-    
-    with open(DATA_PATH, "r", encoding="utf-8") as f:
-        texts = [json.loads(line).get("text", "").strip() for line in f if line.strip()]
+# Upload dataset
+uploaded_file = st.file_uploader("Upload your dataset (CSV format)", type=["csv"])
 
-    return texts
+if uploaded_file:
+    df = pd.read_csv(uploaded_file)
+    st.write("### Preview of Data:")
+    st.write(df.head())
 
-# Query engine
-def query_engine(query, top_k=3):
-    index = load_faiss_index()
-    documents = load_documents()
+    # Sentiment Distribution
+    if "sentiment" in df.columns:
+        st.write("### Sentiment Distribution")
+        fig, ax = plt.subplots(figsize=(4, 2.5))
+        sns.countplot(x=df["sentiment"], palette="coolwarm", ax=ax)
+        st.pyplot(fig)
+    else:
+        st.warning("No sentiment data found in the dataset!")
 
-    # Convert query to NumPy vector (dummy example, replace with actual embedding)
-    query_vector = np.random.rand(index.d)  # Replace with real embedding model
-    query_vector = np.expand_dims(query_vector, axis=0)
+    # Topic Modeling Visualization
+    try:
+        dictionary = Dictionary.load("models/lda_dictionary")
+        lda_model = LdaModel.load("models/lda_model")
 
-    # Perform search
-    distances, indices = index.search(query_vector, top_k)
+        corpus = [dictionary.doc2bow(text.split()) for text in df["text"].astype(str)]
+        vis = gensimvis.prepare(lda_model, corpus, dictionary)
+        lda_html_path = "models/lda_visualization.html"
+        pyLDAvis.save_html(vis, lda_html_path)
 
-    # Retrieve top documents
-    results = [documents[idx] for idx in indices[0] if idx < len(documents)]
-    return results if results else ["No relevant information found."]
+        st.write("### Topic Modeling Visualization")
+        st.markdown(f"[Click here to view LDA visualization]({lda_html_path})")
+    except FileNotFoundError:
+        st.warning("LDA Model not found. Please train the model first.")
+    except KeyError:
+        st.warning("No text column found for topic modeling!")
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
+
+# ---- Chatbot Section ----
+st.write("## 🤖 Chat with the AI")
+user_query = st.text_input("Ask the chatbot about social media trends, AI, or misinformation:")
+
+if user_query:
+    response = query_engine(user_query)
+    st.write("**Chatbot Response:**")
+    st.write(response[0])  # Show the first response
+
+st.write("👈 Upload a dataset to start exploring!")
