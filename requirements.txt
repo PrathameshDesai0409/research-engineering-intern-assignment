@@ -7,3 +7,4 @@ faiss-cpu
 flask
 matplotlib
 seaborn
+pyLDAvis
