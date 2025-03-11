@@ -2,8 +2,8 @@ numpy
 pandas
 scikit-learn
 nltk
-scipy
-gensim
+scipy==1.11.3 
+gensim==4.3.2
 faiss-cpu
 flask
 matplotlib
