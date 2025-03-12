@@ -14,6 +14,9 @@ from chatbot.chatbot import query_engine  # Import chatbot function
 
 st.set_page_config(page_title="Social Media Analytics Dashboard", layout="wide")
 
+# 📂 Default dataset path (change this if needed)
+DEFAULT_DATA_PATH = "data/sentiment_results.csv"
+
 # Sidebar Navigation
 st.sidebar.title("🔍 Navigation")
 page = st.sidebar.radio("Go to:", ["📊 Data Analytics", "💬 Chatbot"])
@@ -21,40 +24,51 @@ page = st.sidebar.radio("Go to:", ["📊 Data Analytics", "💬 Chatbot"])
 if page == "📊 Data Analytics":
     st.title("📊 Social Media Analytics Dashboard")
 
+    # File Upload
     uploaded_file = st.file_uploader("Upload your dataset (CSV format)", type=["csv"])
 
     if uploaded_file:
         df = pd.read_csv(uploaded_file)
-        st.write("### Preview of Data:")
-        st.write(df.head())
-
-        # Sentiment Analysis Visualization
-        if "sentiment" in df.columns:
-            st.write("### Sentiment Distribution")
-            fig, ax = plt.subplots(figsize=(4, 2.5))
-            sns.countplot(x=df["sentiment"], palette="coolwarm", ax=ax)
-            st.pyplot(fig)
+        st.info("✅ Using uploaded dataset")
+    else:
+        if os.path.exists(DEFAULT_DATA_PATH):
+            df = pd.read_csv(DEFAULT_DATA_PATH)
+            st.info(f"📂 Using default dataset: {DEFAULT_DATA_PATH}")
         else:
-            st.warning("No sentiment data found in the dataset!")
+            st.error("❌ No dataset uploaded and default dataset not found!")
+            st.stop()  # Stop execution if no data is available
 
-        # Topic Modeling (LDA)
-        try:
-            dictionary = Dictionary.load("models/lda_dictionary")
-            lda_model = LdaModel.load("models/lda_model")
+    # Show Data Preview
+    st.write("### Preview of Data:")
+    st.write(df.head())
 
-            corpus = [dictionary.doc2bow(text.split()) for text in df["text"].astype(str)]
-            vis = gensimvis.prepare(lda_model, corpus, dictionary)
-            lda_html_path = "models/lda_visualization.html"
-            pyLDAvis.save_html(vis, lda_html_path)
+    # Sentiment Analysis Visualization
+    if "sentiment" in df.columns:
+        st.write("### Sentiment Distribution")
+        fig, ax = plt.subplots(figsize=(4, 2.5))
+        sns.countplot(x=df["sentiment"], palette="coolwarm", ax=ax)
+        st.pyplot(fig)
+    else:
+        st.warning("No sentiment data found in the dataset!")
 
-            st.write("### Topic Modeling Visualization")
-            st.markdown(f"[Click here to view LDA visualization]({lda_html_path})")
-        except FileNotFoundError:
-            st.warning("LDA Model not found. Please train the model first.")
-        except KeyError:
-            st.warning("No text column found for topic modeling!")
-        except Exception as e:
-            st.error(f"An error occurred: {e}")
+    # Topic Modeling (LDA)
+    try:
+        dictionary = Dictionary.load("models/lda_dictionary")
+        lda_model = LdaModel.load("models/lda_model")
+
+        corpus = [dictionary.doc2bow(text.split()) for text in df["text"].astype(str)]
+        vis = gensimvis.prepare(lda_model, corpus, dictionary)
+        lda_html_path = "models/lda_visualization.html"
+        pyLDAvis.save_html(vis, lda_html_path)
+
+        st.write("### Topic Modeling Visualization")
+        st.markdown(f"[Click here to view LDA visualization]({lda_html_path})")
+    except FileNotFoundError:
+        st.warning("LDA Model not found. Please train the model first.")
+    except KeyError:
+        st.warning("No text column found for topic modeling!")
+    except Exception as e:
+        st.error(f"An error occurred: {e}")
 
     st.write("👈 Upload a dataset to start exploring!")
 
