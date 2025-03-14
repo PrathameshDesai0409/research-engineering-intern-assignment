@@ -158,15 +158,15 @@ The application follows a clear data flow pattern:
 
 ### **1. Time Series of Posts**
 
-![Time Series of Posts](screenshots/time_series.png)
+![Time Series of Posts](screenshots/timeseriesofposts.png)
 
 ### **2. Topic Distribution**
 
-![Topic Distribution](screenshots/topic_dist.png)
+![Topic Distribution](screenshots/topicdistribution.png)
 
 ### **3. Sentiment Analysis**
 
-![Sentiment Analysis](screenshots/sentiment.png)
+![Sentiment Analysis](screenshots/sentimentanalysis.png)
 
 ---
 
@@ -182,7 +182,7 @@ Watch the video demo of the dashboard in action:
 
 The dashboard is hosted on **Streamlit Sharing**:
 
-- [Live Dashboard](https://your-dashboard-url.streamlit.app)
+- [Live Dashboard]([https://your-dashboard-url.streamlit.app](https://socialanalysis.streamlit.app/))
 
 ---
 
