@@ -174,7 +174,7 @@ The application follows a clear data flow pattern:
 
 Watch the video demo of the dashboard in action:
 
-- [Google Drive Link]([https://drive.google.com/file/d/your-video-id/view](https://drive.google.com/drive/folders/1c6HrPM2hPEcjdV7ZgFg0EpbWWYPqPw7H?usp=sharing))
+- [Google Drive Link](https://drive.google.com/drive/folders/1c6HrPM2hPEcjdV7ZgFg0EpbWWYPqPw7H?usp=sharing)
 
 ---
 
@@ -182,7 +182,7 @@ Watch the video demo of the dashboard in action:
 
 The dashboard is hosted on **Streamlit Sharing**:
 
-- [Live Dashboard]([https://your-dashboard-url.streamlit.app](https://socialanalysis.streamlit.app/))
+- [Live Dashboard](https://socialanalysis.streamlit.app/)
 
 ---
 
