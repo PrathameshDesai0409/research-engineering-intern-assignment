@@ -5,5 +5,5 @@ numpy
 scikit-learn
 transformers
 torch
-statsmodel
 textblob
+statsmodels
