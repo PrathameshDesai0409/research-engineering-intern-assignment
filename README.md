@@ -182,7 +182,7 @@ Watch the video demo of the dashboard in action:
 
 The dashboard is hosted on **Streamlit Sharing**:
 
-- [Live Dashboard](https://socialanalysis.streamlit.app/)
+- [Live Dashboard](https://social1.streamlit.app/)
 
 ---
 
