@@ -6,4 +6,4 @@ scikit-learn
 transformers
 torch
 textblob
-statsmodels
+
